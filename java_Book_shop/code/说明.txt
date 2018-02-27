@@ -1,0 +1,2 @@
+本项目使用InteliJ IDEA构建
+数据库使用SQL Server 和C3P0 账号sa密码zjs19941118

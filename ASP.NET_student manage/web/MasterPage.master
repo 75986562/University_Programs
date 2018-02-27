@@ -1,0 +1,138 @@
+﻿<%@ master language="C#" autoeventwireup="true" inherits="MasterPageManager, App_Web_masterpage.master.cdcab7d2" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .head {
+            height: 85px;
+            background-color: white;
+            border-bottom: 1px solid #808080;
+            overflow: hidden;
+        }
+
+        .headcontainer {
+            width: 1000px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            padding-top: 15px;
+            float: left;
+            width: 160px;
+        }
+
+        .navtab {
+            text-align: center;
+            margin-left: 0px;
+            height: 85px;
+            width: 840px;
+            overflow: hidden;
+        }
+
+            .navtab tr {
+                font-family: "微软雅黑";
+                font-size: 20px;
+                color: #000000;
+                height: 80px;
+                width: 120px;
+                text-align: center;
+                cursor: pointer;
+            }
+
+            .navtab td {
+                text-align: center;
+            }
+
+            .navtab a {
+                color: black;
+                text-decoration: none;
+            }
+
+        .navbtn {
+            font-family: "微软雅黑";
+            width: 120px;
+            height: 40px;
+            border-radius: 5px;
+            font-size: 20px;
+            border: 1px solid #eaeaea;
+            background-color: rgb(79,175,97);
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <form id="form" runat="server">
+        <div class="head">
+            <div class="headcontainer">
+                <div class="logo">
+                    <img src="/Images/logo.png" />
+                </div>
+                <table class="navtab">
+                    <tr>
+                        <%if (Session["type"] != null)
+                            { %>
+                        <td><a href="/Default.aspx">首页 </a></td>
+                        <%if ("Admin".Equals(Session["type"].ToString()))
+                            {%>
+                        <td><a href="/Admin/CourceManage.aspx">课程管理</a></td>
+                        <td><a href="/Admin/TeacherManage.aspx">教师管理</a></td>
+                        <td><a href="/Admin/StudentManage.aspx">学生管理</a></td>
+                        <td><a href="/Admin/SelfCenter.aspx">个人中心</a></td>
+                        <% }
+                            else if ("Teacher".Equals(Session["type"].ToString()))
+                            { %>
+                        <td><a href="/Teacher/CourseManage.aspx">课程管理</a></td>
+                        <td><a href="/Teacher/AllSubject">全部课程</a></td>
+                        <td><a href="/Teacher/ScoresSearch">成绩评分</a></td>
+                        <td><a href="/Teacher/SelfCenter.aspx">个人中心</a></td>
+                        <%}
+                            else if ("Student".Equals(Session["type"].ToString()))
+                            { %>
+                        <td><a href="/Student/CourseManage.aspx">课程管理</a></td>
+                        <td><a href="/Student/AllSubject.aspx">全部课程</a></td>
+                        <td><a href="/Student/ScoresSearch.aspx">成绩查询</a></td>
+                        <td><a href="/Student/SelfCenter.aspx">个人中心</a></td>
+                        <% }%>
+                        <td style="width: 100px; text-align: center;">
+                            <asp:Label ID="lblName" runat="server" Font-Size="16px" ForeColor="#66FF66"></asp:Label>
+                        </td>
+                        <%}
+                            else
+                            { %>
+                        <td></td>
+                        <%} %>
+                        <%if (Session["type"] != null)
+                            { %>
+                        <td style="width: 120px">
+                            <asp:Button ID="btnQuit" runat="server" CssClass="navbtn" Text="退出登录" OnClick="btnQuit_Click" />
+                        </td>
+                        <%}
+                            else
+                            { %>
+                        <td style="width: 120px">
+                            <asp:Button ID="btnLogin" runat="server" CssClass="navbtn" Text="登录系统" OnClick="btnLogin_Click" />
+                        </td>
+                        <%} %>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div style="width: 1000px; margin: 0 auto;">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>
